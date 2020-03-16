@@ -15,7 +15,7 @@ steps:
   inputs:
     command: test
     projects: '/home/vsts/work/1/s/cicd-pipeline-test/cicd-pipeline-test.csproj'
-    publishTestResults: false
+    publishTestResults: true
 
 - task: PublishTestResults@2
   inputs:
