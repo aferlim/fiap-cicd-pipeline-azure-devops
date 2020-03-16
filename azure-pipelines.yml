@@ -1,0 +1,38 @@
+# ASP.NET Core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: test
+    projects: '**\*cicd-pipeline-test\cicd-pipeline-test.csproj'
+    publishTestResults: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '--configuration Release --output $(Build.StagingDirectory)'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+- task: ArchiveFiles@1
+  displayName: 'Archive publish files '
+  inputs:
+    rootFolder: '$(Build.StagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: $(Build.BuildId).zip'
+  inputs:
+    ArtifactName: '$(Build.BuildId).zip'
+
