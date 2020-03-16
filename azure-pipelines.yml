@@ -14,7 +14,7 @@ steps:
   displayName: 'dotnet test'
   inputs:
     command: test
-    projects: '**\*cicd-pipeline-test\cicd-pipeline-test.csproj'
+    projects: '/home/vsts/work/1/s/cicd-pipeline-test/cicd-pipeline-test.csproj'
     publishTestResults: false
 
 - task: DotNetCoreCLI@2
