@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>todo_api</RootNamespace>
+  </PropertyGroup>
+
+<ItemGroup>
+    <ProjectReference Include="..\crosscutting\crosscutting.csproj" />
+    <ProjectReference Include="..\todo-bcontext\todo-bcontext.csproj" />
+  </ItemGroup>
+</Project>
