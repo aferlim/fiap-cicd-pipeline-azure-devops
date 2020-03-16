@@ -4,4 +4,4 @@
 
 [![Build Status](https://dev.azure.com/andrelima0712/fiap-cicd-pipeline/_apis/build/status/aferlim.fiap-cicd-pipeline-azure-devops?branchName=master)](https://dev.azure.com/andrelima0712/fiap-cicd-pipeline/_build/latest?definitionId=1&branchName=master)
 
-asd
+## Running
