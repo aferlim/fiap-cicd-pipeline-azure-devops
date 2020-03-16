@@ -14,9 +14,13 @@ steps:
   displayName: 'dotnet test'
   inputs:
     command: test
-    projects: '**\*cicd-pipeline-test\cicd-pipeline-test.csproj'
-    publishTestResults: false
+    projects: '/home/vsts/work/1/s/cicd-pipeline-test/cicd-pipeline-test.csproj'
+    publishTestResults: true
 
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '**/TEST-*.xml'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
