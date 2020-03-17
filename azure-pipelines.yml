@@ -17,6 +17,7 @@ steps:
     projects: '/home/vsts/work/1/s/cicd-pipeline-test/cicd-pipeline-test.csproj'
     arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
     publishTestResults: true
+
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: ReportGenerator
   inputs:
@@ -34,23 +35,33 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
     reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+
 # - task: PublishTestResults@2
 #   inputs:
 #     testResultsFormat: 'NUnit'
 #     testResultsFiles: '**/TEST-*.xml'
+
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet publish'
+#   inputs:
+#     command: publish
+#     publishWebProjects: false
+#     arguments: '--configuration Release --output $(Build.StagingDirectory)'
+#     zipAfterPublish: false
+#     modifyOutputPath: false
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
     command: publish
-    publishWebProjects: false
-    arguments: '--configuration Release --output $(Build.StagingDirectory)'
-    zipAfterPublish: false
-    modifyOutputPath: false
+    publishWebProjects: true
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.StagingDirectory)'
+    zipAfterPublish: true
 
-- task: ArchiveFiles@1
-  displayName: 'Archive publish files '
-  inputs:
-    rootFolder: '$(Build.StagingDirectory)'
+# - task: ArchiveFiles@1
+#   displayName: 'Archive publish files '
+#   inputs:
+#     rootFolder: '$(Build.StagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: $(Build.BuildId).zip'
